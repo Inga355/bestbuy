@@ -10,14 +10,17 @@ class Product:
         self.name = name
         self.price = price
         self.quantity = quantity
-        self.active = True
+        if quantity == 0:
+            self.active = False
+        else:
+            self.active = True
 
     def get_quantity(self):
         return self.quantity
 
     def set_quantity(self, quantity):
         self.quantity = quantity
-        if self.quantity < 0:
+        if self.quantity <= 0:
             self.active = False
         else:
             return self.quantity
