@@ -17,7 +17,7 @@ class Store:
     def get_all_products(self) -> list:
         active_products = []
         for item in self.list_of_products:
-            if item.is_active:
+            if item.is_active() == True:
                 active_products.append(item)
         return active_products
 
