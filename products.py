@@ -1,6 +1,18 @@
 class Product:
+    """
+    Class for adding a product to the store
+
+    Attributes:
+    name (str): product name
+    price (float): product price
+    quantity (int): amount of available products in store
+    """
+
 
     def __init__(self, name, price, quantity):
+        """
+        Constructor for name, price and quantity initialisation of a product
+        """
         if not name:
             raise ValueError("We need a name")
         if price <= 0:
@@ -45,6 +57,10 @@ class Product:
 
 
     def buy(self, quantity):
+        """
+        checks if product is available (quantity > 0) and
+        changes the quantity of the product
+        """
         if self.quantity < quantity:
             raise ValueError(f"We don't have enough {self.name}. Only {self.quantity} left!")
         new_quantity = self.quantity - quantity
