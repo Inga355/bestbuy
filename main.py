@@ -39,30 +39,34 @@ def start(your_store):
 
         # Prints list of available products
         elif choice == "3":
-            print("")
-            for index, item in enumerate(your_store.get_all_products(), start=1):
-                print(f"{index}.{item.show()}")
-            print("")
-            print("When you want to finish order, enter empty text.")
-            # Gets product number and amount from user or jumps back to store menu
-            product_number = input("Which product # do you want? ")
-            if product_number == "":
-                continue
-            product_number = int(product_number) -1
-            quantity = int(input("What amount do you want? "))
-            # Checks product number and amount of available items
-            if 0 <= product_number < len(your_store.get_all_products()):
-                selected_product = your_store.get_all_products()[product_number]
-                if selected_product.get_quantity() >= quantity:
-                    selected_product.buy(quantity)
-                    print(f"Ordered {quantity} of {selected_product.name}. Remaining quantity: {selected_product.quantity}")
+            while True:
+                print("")
+                for index, item in enumerate(your_store.get_all_products(), start=1):
+                    print(f"{index}.{item.show()}")
+                print("")
+                print("When you want to finish order, enter empty text.")
+                # Gets product number and amount from user or jumps back to store menu
+                product_number = input("Which product # do you want? ")
+                if product_number == "":
+                    break
+                product_number = int(product_number) -1
+                quantity = int(input("What amount do you want? "))
+                # Checks product number and amount of available items
+                if 0 <= product_number < len(your_store.get_all_products()):
+                    selected_product = your_store.get_all_products()[product_number]
+                    if selected_product.get_quantity() >= quantity:
+                        selected_product.buy(quantity)
+                        print(f"\nOrdered {quantity} of {selected_product.name}. Remaining quantity: {selected_product.quantity}")
+                    else:
+                        print(f"\nNot enough quantity for {selected_product.name}. Available: {selected_product.quantity}")
                 else:
-                    print(f"Not enough quantity for {selected_product.name}. Available: {selected_product.quantity}")
-            else:
-                print("Invalid product number. Please choose again.")
+                    print("Invalid product number. Please choose again.")
 
         # Quits the program
         elif choice == "4":
             break
         else:
             print("\nInvalid choice. Please try again.\n")
+
+
+start(best_buy)
