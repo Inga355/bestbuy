@@ -41,7 +41,7 @@ class Product:
 
 
     def show(self):
-        return f"Product: {self.name}, Price: {self.price}, Quantity: {self.quantity}"
+        return f" {self.name}, Price: {self.price}, Quantity: {self.quantity}"
 
 
     def buy(self, quantity):
