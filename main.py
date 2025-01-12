@@ -1,5 +1,3 @@
-from random import choice
-
 import products
 import store
 
