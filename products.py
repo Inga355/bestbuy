@@ -27,17 +27,21 @@ class Product:
         else:
             self.active = True
 
+    def get_price(self):
+        return self.price
 
-    def get_quantity(self):
+
+    def get_quantity(self) -> int:
         return self.quantity
 
 
-    def set_quantity(self, quantity):
+    def set_quantity(self, quantity) -> int:
+        if not isinstance(quantity, int):
+            raise TypeError("Quantity must be an integer")
         self.quantity = quantity
         if self.quantity <= 0:
-            self.active = False
-        else:
-            return self.quantity
+            self.deactivate()
+        return self.quantity
 
 
     def is_active(self) -> bool:
@@ -64,6 +68,9 @@ class Product:
         if self.quantity < quantity:
             raise ValueError(f"We don't have enough {self.name}. Only {self.quantity} left!")
         new_quantity = self.quantity - quantity
-        return self.set_quantity(new_quantity)
+        self.set_quantity(new_quantity)
+        price_to_pay = quantity * self.price
+        print("Product added to list!")
+        return price_to_pay
 
 

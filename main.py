@@ -1,12 +1,7 @@
 import products
 import store
 
-# setup initial stock of inventory
-product_list = [ products.Product("MacBook Air M2", price=1450, quantity=100),
-                 products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
-                 products.Product("Google Pixel 7", price=500, quantity=250)
-               ]
-best_buy = store.Store(product_list)
+
 
 
 def start(your_store):
@@ -39,6 +34,7 @@ def start(your_store):
 
         # Prints list of available products
         elif choice == "3":
+            total_price = 0
             while True:
                 print("")
                 for index, item in enumerate(your_store.get_all_products(), start=1):
@@ -48,6 +44,8 @@ def start(your_store):
                 # Gets product number and amount from user or jumps back to store menu
                 product_number = input("Which product # do you want? ")
                 if product_number == "":
+                    print("************************************")
+                    print(f"Order made! Total payment: ${total_price}")
                     break
                 product_number = int(product_number) -1
                 quantity = int(input("What amount do you want? "))
@@ -56,7 +54,9 @@ def start(your_store):
                     selected_product = your_store.get_all_products()[product_number]
                     if selected_product.get_quantity() >= quantity:
                         selected_product.buy(quantity)
-                        print(f"\nOrdered {quantity} of {selected_product.name}. Remaining quantity: {selected_product.quantity}")
+                        item_costs = quantity * selected_product.get_price()
+                        total_price += item_costs
+                        print(f"\nOrdered {quantity} of {selected_product.name} for ${item_costs}. Remaining quantity: {selected_product.quantity}")
                     else:
                         print(f"\nNot enough quantity for {selected_product.name}. Available: {selected_product.quantity}")
                 else:
@@ -69,4 +69,15 @@ def start(your_store):
             print("\nInvalid choice. Please try again.\n")
 
 
-start(best_buy)
+def main():
+    # setup initial stock of inventory
+    product_list = [products.Product("MacBook Air M2", price=1450, quantity=100),
+                    products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
+                    products.Product("Google Pixel 7", price=500, quantity=250)
+                    ]
+    best_buy = store.Store(product_list)
+    start(best_buy)
+
+
+if __name__ == "__main__":
+    main()
