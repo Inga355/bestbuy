@@ -1,5 +1,7 @@
+from itertools import product
+
 import pytest
-from products import Product
+from products import Product, NonStockedProduct
 
 
 def test_creating_product():
@@ -49,3 +51,8 @@ def test_buying_to_much_raises_exception():
     assert f"We don't have enough {product.name}. Only {product.quantity} left!" in str(excinfo.value)
 
 
+def test_creating_subclass_NonStocked():
+    product = NonStockedProduct(name="TestNonStocked", price=10.00)
+    assert product.name == "TestNonStocked"
+    assert product.price == 10.00
+    assert product.active == True
