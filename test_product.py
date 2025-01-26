@@ -35,4 +35,17 @@ def test_creating_product_with_neg_quantity():
         Product(name="TestProduct", price=10.00, quantity=-5)
     assert "Quantity cannot be negative" in str(excinfo.value)
 
-    
+
+def test_product_gets_deactivated():
+    product = Product("TestProduct", price=10.00, quantity=5)
+    product.set_quantity(-5)
+    assert product.is_active() == False
+
+
+def test_buying_to_much_raises_exception():
+    product = Product("TestProduct", price=10.00, quantity=5)
+    with pytest.raises(ValueError) as excinfo:
+        product.buy(10)
+    assert f"We don't have enough {product.name}. Only {product.quantity} left!" in str(excinfo.value)
+
+
