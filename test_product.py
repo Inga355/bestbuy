@@ -64,3 +64,10 @@ def test_creating_subclass_LimitedProduct():
     assert product.price == 10.00
     assert product.quantity == 5
     assert product.maximum == 1
+
+
+def test_buying_more_than_maximum():
+    product = LimitedProduct("TestProduct", price=10.00, quantity=5, maximum=1)
+    with pytest.raises(ValueError) as excinfo:
+        product.buy(3)
+    assert f"You can only buy {product.maximum}."
