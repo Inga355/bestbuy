@@ -1,7 +1,7 @@
 from itertools import product
 
 import pytest
-from products import Product, NonStockedProduct
+from products import Product, NonStockedProduct, LimitedProduct
 
 
 def test_creating_product():
@@ -56,3 +56,11 @@ def test_creating_subclass_NonStocked():
     assert product.name == "TestNonStocked"
     assert product.price == 10.00
     assert product.active == True
+
+
+def test_creating_subclass_LimitedProduct():
+    product = LimitedProduct(name="TestLimited", price=10.00, quantity=5, maximum=1)
+    assert product.name == "TestLimited"
+    assert product.price == 10.00
+    assert product.quantity == 5
+    assert product.maximum == 1

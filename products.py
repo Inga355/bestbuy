@@ -99,3 +99,14 @@ class NonStockedProduct(Product):
         print("Product added to list!")
         return price_to_pay
 
+
+class LimitedProduct(Product):
+
+    def __init__(self, name, price, quantity, maximum):
+        super().__init__(name, price, quantity)
+        self.maximum = maximum
+
+
+    def show(self):
+        return f" {self.name}, Price: {self.price}, Quantity: {self.quantity}, Maximum: {self.maximum}"
+
