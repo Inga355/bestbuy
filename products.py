@@ -63,7 +63,7 @@ class Product:
     def buy(self, quantity):
         """
         checks if product is available (quantity > 0) and
-        changes the quantity of the product
+        changes the quantity of the product and returns the price to pay
         """
         if self.quantity < quantity:
             raise ValueError(f"We don't have enough {self.name}. Only {self.quantity} left!")
@@ -74,3 +74,44 @@ class Product:
         return price_to_pay
 
 
+class NonStockedProduct(Product):
+    """
+    Subclass for products that have no quantity and are always available.
+    """
+    def __init__(self, name, price):
+        super().__init__(name, price, quantity=0)
+        self.active = True
+
+
+    def set_quantity(self, quantity) -> int:
+        raise AttributeError("Cannot change the quantity of a non-stocked product.")
+
+
+    def show(self):
+        return f" {self.name}, Price: {self.price}"
+
+
+    def buy(self, quantity):
+        """
+        returns the price_to_pay
+        """
+        price_to_pay = quantity * self.price
+        print("Product added to list!")
+        return price_to_pay
+
+
+class LimitedProduct(Product):
+
+    def __init__(self, name, price, quantity, maximum):
+        super().__init__(name, price, quantity)
+        self.maximum = maximum
+
+
+    def show(self):
+        return f" {self.name}, Price: {self.price}, Quantity: {self.quantity}, Maximum: {self.maximum}"
+
+
+    def buy(self, quantity):
+        if quantity != self.maximum:
+            raise ValueError(f"You can only buy {self.maximum}.")
+        return super().buy(quantity)
