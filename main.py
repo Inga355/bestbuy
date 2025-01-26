@@ -2,8 +2,6 @@ import products
 import store
 
 
-
-
 def start(your_store):
     """
     prints the store menu and asks for user choice
