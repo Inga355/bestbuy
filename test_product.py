@@ -1,5 +1,3 @@
-from itertools import product
-
 import pytest
 from products import Product, NonStockedProduct, LimitedProduct
 
@@ -51,14 +49,14 @@ def test_buying_to_much_raises_exception():
     assert f"We don't have enough {product.name}. Only {product.quantity} left!" in str(excinfo.value)
 
 
-def test_creating_subclass_NonStocked():
+def test_creating_subclass_nonstocked():
     product = NonStockedProduct(name="TestNonStocked", price=10.00)
     assert product.name == "TestNonStocked"
     assert product.price == 10.00
     assert product.active == True
 
 
-def test_creating_subclass_LimitedProduct():
+def test_creating_subclass_limitedproduct():
     product = LimitedProduct(name="TestLimited", price=10.00, quantity=5, maximum=1)
     assert product.name == "TestLimited"
     assert product.price == 10.00
@@ -70,4 +68,4 @@ def test_buying_more_than_maximum():
     product = LimitedProduct("TestProduct", price=10.00, quantity=5, maximum=1)
     with pytest.raises(ValueError) as excinfo:
         product.buy(3)
-    assert f"You can only buy {product.maximum}."
+    assert f"You can only buy {product.maximum}." in str(excinfo.value)
