@@ -112,6 +112,6 @@ class LimitedProduct(Product):
 
 
     def buy(self, quantity):
-        if quantity != self.maximum:
+        if quantity > self.maximum:
             raise ValueError(f"You can only buy {self.maximum}.")
         return super().buy(quantity)
