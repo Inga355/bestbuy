@@ -97,7 +97,10 @@ class NonStockedProduct(Product):
         """
         returns the price_to_pay
         """
-        price_to_pay = quantity * self.price
+        if self.promotion:
+            price_to_pay = self.promotion.apply_promotion(self, quantity)
+        else:
+            price_to_pay = quantity * self.price
         print("Product added to list!")
         return price_to_pay
 

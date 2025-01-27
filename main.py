@@ -70,10 +70,9 @@ def start(your_store):
                             except ValueError as e:
                                 print(e)
                                 continue
-                        selected_product.buy(quantity)
+                        item_costs = selected_product.buy(quantity)
                         if isinstance(selected_product, LimitedProduct):
                             max_counter += quantity
-                        item_costs = quantity * selected_product.get_price()
                         total_price += item_costs
                         print(f"\nOrdered {quantity} of {selected_product.name} for ${item_costs}. Remaining quantity: {selected_product.quantity}")
                 else:
