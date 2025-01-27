@@ -28,7 +28,7 @@ def start(your_store):
         if choice == "1":
             print("")
             for index, item in enumerate(your_store.get_all_products(), start=1):
-                print(f"{index}.{item.show()}")
+                print(f"{index}.{item.__str__()}")
             print("")
 
         # Shows total amount of all products in store
@@ -41,7 +41,7 @@ def start(your_store):
             while True:
                 print("")
                 for index, item in enumerate(your_store.get_all_products(), start=1):
-                    print(f"{index}.{item.show()}")
+                    print(f"{index}.{item.__str__()}")
                 print("")
                 print("When you want to finish order, enter empty text.")
 

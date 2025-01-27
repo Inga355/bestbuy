@@ -10,7 +10,6 @@ class Product:
     price (float): product price
     quantity (int): amount of available products in store
     """
-
     def __init__(self, name, price, quantity):
         """
         Constructor for name, price and quantity initialisation of a product
@@ -59,7 +58,7 @@ class Product:
     def deactivate(self):
         self.active = False
 
-    def show(self):
+    def __str__(self):
         return f" {self.name}, Price: {self.price}, Quantity: {self.quantity}, Promotion: {self.promotion}"
 
     def buy(self, quantity):
@@ -90,7 +89,7 @@ class NonStockedProduct(Product):
     def set_quantity(self, quantity) -> int:
         raise AttributeError("Cannot change the quantity of a non-stocked product.")
 
-    def show(self):
+    def __str__(self):
         return f" {self.name}, Price: {self.price}, Promotion: {self.promotion}"
 
     def buy(self, quantity):
@@ -106,12 +105,14 @@ class NonStockedProduct(Product):
 
 
 class LimitedProduct(Product):
-
+    """
+    Subclass for products that can only be purchased x-times(Arg: maximum).
+    """
     def __init__(self, name, price, quantity, maximum):
         super().__init__(name, price, quantity)
         self.maximum = maximum
 
-    def show(self):
+    def __str__(self):
         return f" {self.name}, Price: {self.price}, Quantity: {self.quantity}, Maximum: {self.maximum}, Promotion: {self.promotion}"
 
     def buy(self, quantity):

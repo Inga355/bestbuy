@@ -2,6 +2,9 @@ from abc import ABC, abstractmethod
 
 
 class Promotion(ABC):
+    """
+    Abstract class to add special price calculation to a product
+    """
     @abstractmethod
     def __init__(self, name):
         self.name = name
@@ -14,6 +17,9 @@ class Promotion(ABC):
 
 
 class SecondHalfPrice(Promotion):
+    """
+    Subclass to get every second item at half price
+    """
     def __init__(self, name):
         super().__init__(name)
 
@@ -24,6 +30,9 @@ class SecondHalfPrice(Promotion):
 
 
 class PercentDiscount(Promotion):
+    """
+    Subclass to get percentage discount (i.e. 20% off)
+    """
     def __init__(self, name, percent):
         super().__init__(name)
         self.percent = percent
@@ -33,6 +42,9 @@ class PercentDiscount(Promotion):
 
 
 class ThirdOneFree(Promotion):
+    """
+    Subclass to buy 2 and get one free
+    """
     def __init__(self, name):
         super().__init__(name)
 
